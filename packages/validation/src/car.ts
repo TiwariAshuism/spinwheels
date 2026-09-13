@@ -1,11 +1,28 @@
 import { z } from "zod";
 
+function emptyToUndefined(value: unknown) {
+  if (value === "" || value === null || value === undefined) return undefined;
+  return value;
+}
+
+function trimToUndefined(value: unknown) {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed === "" ? undefined : trimmed;
+}
+
 export const carSearchSchema = z.object({
-  location: z.string().trim().optional(),
-  startDate: z.string().trim().optional(),
-  endDate: z.string().trim().optional(),
-  evOnly: z.coerce.boolean().optional(),
-  maxPrice: z.coerce.number().positive().optional(),
+  location: z.preprocess(trimToUndefined, z.string().min(1).optional()),
+  startDate: z.preprocess(trimToUndefined, z.string().min(1).optional()),
+  endDate: z.preprocess(trimToUndefined, z.string().min(1).optional()),
+  evOnly: z.preprocess(
+    (value) => {
+      if (value === "" || value === null || value === undefined) return undefined;
+      return value === "true" || value === true;
+    },
+    z.boolean().optional(),
+  ),
+  maxPrice: z.preprocess(emptyToUndefined, z.coerce.number().positive().optional()),
 });
 
 export const carSchema = z.object({

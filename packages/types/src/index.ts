@@ -38,6 +38,13 @@ export type Car = {
   rating: number;
   instantBooking: boolean;
   status: "active" | "pending" | "inactive";
+  imageUrl: string;
+  images: string[];
+  description: string;
+  transmission: "Automatic" | "Manual";
+  seats: number;
+  fuelType: string;
+  features: string[];
 };
 
 export type BookingStatus = "pending" | "confirmed" | "active" | "completed" | "cancelled";

@@ -57,6 +57,19 @@ export const mockCars: Car[] = [
     rating: 4.8,
     instantBooking: true,
     status: "active",
+    imageUrl:
+      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=900&h=600&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1593941707879-74c5b2a2a0a1?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&h=800&fit=crop&q=80",
+    ],
+    description:
+      "Well-maintained Nexon EV with fast DC charging support, ideal for city runs and weekend getaways around Bengaluru.",
+    transmission: "Automatic",
+    seats: 5,
+    fuelType: "Electric",
+    features: ["Fast charging", "GPS navigation", "Bluetooth", "Reverse camera", "Cruise control"],
   },
   {
     id: "car-2",
@@ -73,6 +86,19 @@ export const mockCars: Car[] = [
     rating: 4.6,
     instantBooking: true,
     status: "active",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519641471654-76ece0108eb1?w=900&h=600&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1519641471654-76ece0108eb1?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&h=800&fit=crop&q=80",
+    ],
+    description:
+      "Spacious Creta SUV with smooth highway manners, perfect for outstation trips to Mysore, Coorg, or the airport.",
+    transmission: "Automatic",
+    seats: 5,
+    fuelType: "Petrol",
+    features: ["Sunroof", "Apple CarPlay", "Rear AC vents", "Parking sensors", "ABS + airbags"],
   },
   {
     id: "car-3",
@@ -89,6 +115,19 @@ export const mockCars: Car[] = [
     rating: 4.9,
     instantBooking: false,
     status: "active",
+    imageUrl:
+      "https://images.unsplash.com/photo-1593941707879-74c5b2a2a0a1?w=900&h=600&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1593941707879-74c5b2a2a0a1?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&h=800&fit=crop&q=80",
+    ],
+    description:
+      "Premium MG ZS EV with long range and a quiet cabin — a great way to try electric before you buy.",
+    transmission: "Automatic",
+    seats: 5,
+    fuelType: "Electric",
+    features: ["Panoramic sunroof", "i-Smart connectivity", "360° camera", "Regenerative braking", "Premium audio"],
   },
   {
     id: "car-4",
@@ -104,7 +143,20 @@ export const mockCars: Car[] = [
     trustScore: 86,
     rating: 4.4,
     instantBooking: true,
-    status: "pending",
+    status: "active",
+    imageUrl:
+      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=900&h=600&fit=crop&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1494976388531-d105849445ff?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200&h=800&fit=crop&q=80",
+    ],
+    description:
+      "Compact and fuel-efficient Swift for tight city parking, short errands, and budget-friendly daily rentals.",
+    transmission: "Manual",
+    seats: 5,
+    fuelType: "Petrol",
+    features: ["Fuel efficient", "Compact size", "Touchscreen infotainment", "Power windows", "Central locking"],
   },
 ];
 

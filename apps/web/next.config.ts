@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
     "@spinwheels/types",
     "@spinwheels/validation",
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
   headers: async () => [
     {
       source: "/sw.js",

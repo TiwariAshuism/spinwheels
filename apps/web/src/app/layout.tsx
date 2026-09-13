@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import { SITE_DESCRIPTION, SITE_NAME } from "@spinwheels/config";
+import { HashScroll } from "@/components/layout/HashScroll";
 import { PwaRegister } from "@/components/pwa/PwaRegister";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexSans.variable}`}>
       <body>
         {children}
+        <HashScroll />
         <PwaRegister />
       </body>
     </html>

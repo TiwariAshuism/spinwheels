@@ -1,4 +1,5 @@
 import { Button, Container } from "@spinwheels/ui";
+import { SiteLink } from "@/components/layout/SiteLink";
 import { HeroArt } from "./HeroArt";
 
 export function Hero() {
@@ -13,10 +14,10 @@ export function Hero() {
             <strong>2 hours</strong> of booking — no advance planning needed.
           </p>
           <div className="hero-ctas">
-          <Button href="/search">Browse cars</Button>
-          <Button href="#how" variant="outline-light">
-            See how it works
-          </Button>
+            <Button href="/search">Browse cars</Button>
+            <SiteLink href="#how" className="btn btn-outline-light">
+              See how it works
+            </SiteLink>
           </div>
         </div>
         <HeroArt />

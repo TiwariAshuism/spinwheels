@@ -21,18 +21,12 @@ export function LandingPage() {
       <Nav />
       <main>
         <Hero />
-        <ScrollReveal>
-          <FeaturedCars />
-        </ScrollReveal>
+        <FeaturedCars />
         <ScrollReveal>
           <Problem />
         </ScrollReveal>
-        <ScrollReveal>
-          <HowItWorks />
-        </ScrollReveal>
-        <ScrollReveal>
-          <WhySpinwheels />
-        </ScrollReveal>
+        <HowItWorks />
+        <WhySpinwheels />
         <ScrollReveal>
           <InstantBooking />
         </ScrollReveal>
@@ -42,21 +36,15 @@ export function LandingPage() {
         <ScrollReveal>
           <GroupTrip />
         </ScrollReveal>
-        <ScrollReveal>
-          <Owners />
-        </ScrollReveal>
+        <Owners />
         <ScrollReveal>
           <EvSection />
         </ScrollReveal>
         <ScrollReveal>
           <Trust />
         </ScrollReveal>
-        <ScrollReveal direction="right">
-          <DriverTeaser />
-        </ScrollReveal>
-        <ScrollReveal>
-          <WaitlistSection />
-        </ScrollReveal>
+        <DriverTeaser />
+        <WaitlistSection />
       </main>
       <Footer />
     </>

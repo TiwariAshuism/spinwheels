@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { NAV_LINKS, SITE_NAME } from "@spinwheels/config";
 import { Button, Container } from "@spinwheels/ui";
+import { SiteLink } from "@/components/layout/SiteLink";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -14,20 +15,20 @@ export function Nav() {
   return (
     <header className="nav" id="top">
       <Container className="nav-inner">
-        <a href="#top" className="brand">
+        <SiteLink href="/" className="brand">
           {SITE_NAME}
-        </a>
-    <nav className="nav-links">
-      <a href="/search">Browse cars</a>
-      {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href}>
+        </SiteLink>
+        <nav className="nav-links">
+          <SiteLink href="/search">Browse cars</SiteLink>
+          {NAV_LINKS.map((link) => (
+            <SiteLink key={link.href} href={link.href}>
               {link.label}
-            </a>
+            </SiteLink>
           ))}
         </nav>
-        <a href="/login" className="nav-signin">
+        <SiteLink href="/login" className="nav-signin">
           Sign in
-        </a>
+        </SiteLink>
         <Button href="#waitlist" className="nav-cta">
           Get early access
         </Button>
@@ -44,17 +45,17 @@ export function Nav() {
         </button>
       </Container>
       <div className={`mobile-menu${open ? " open" : ""}`}>
-        <a href="/search" onClick={closeMenu}>
+        <SiteLink href="/search" onClick={closeMenu}>
           Browse cars
-        </a>
+        </SiteLink>
         {NAV_LINKS.map((link) => (
-          <a key={link.href} href={link.href} onClick={closeMenu}>
+          <SiteLink key={link.href} href={link.href} onClick={closeMenu}>
             {link.label}
-          </a>
+          </SiteLink>
         ))}
-        <a href="/login" onClick={closeMenu}>
+        <SiteLink href="/login" onClick={closeMenu}>
           Sign in
-        </a>
+        </SiteLink>
       </div>
     </header>
   );

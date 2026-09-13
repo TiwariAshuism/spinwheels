@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -17,22 +17,55 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = ref.current;
     if (!node) return;
+
+    const reveal = () => node.classList.add("scroll-reveal-visible");
+
+    const hash = window.location.hash.slice(1);
+    if (hash && node.querySelector(`#${CSS.escape(hash)}`)) {
+      reveal();
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      reveal();
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          node.classList.add("scroll-reveal-visible");
+          reveal();
           observer.unobserve(node);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0, rootMargin: "0px" },
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+
+    const checkVisible = () => {
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        reveal();
+        observer.unobserve(node);
+      }
+    };
+
+    checkVisible();
+    requestAnimationFrame(checkVisible);
+
+    const timeout = window.setTimeout(() => {
+      reveal();
+      observer.unobserve(node);
+    }, 800);
+
+    return () => {
+      window.clearTimeout(timeout);
+      observer.disconnect();
+    };
   }, []);
 
   const classes = ["scroll-reveal", `scroll-reveal-${direction}`, className]

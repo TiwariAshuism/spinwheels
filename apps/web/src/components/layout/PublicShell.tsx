@@ -1,8 +1,7 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { SITE_NAME } from "@spinwheels/config";
-import { Button } from "@spinwheels/ui";
 import { getSession } from "@/lib/auth/session";
+import { PublicNav } from "./PublicNav";
 
 type PublicShellProps = {
   children: ReactNode;
@@ -16,30 +15,7 @@ export async function PublicShell({ children, title, subtitle, hero = false }: P
 
   return (
     <div className="public-shell">
-      <header className="public-nav">
-        <div className="wrap public-nav-inner">
-          <Link href="/" className="brand">
-            {SITE_NAME}
-          </Link>
-          <nav className="public-nav-links">
-            <Link href="/search">Browse cars</Link>
-            <Link href="/#how">How it works</Link>
-            <Link href="/#waitlist">Early access</Link>
-          </nav>
-          <div className="public-nav-actions">
-            {session ? (
-              <Button href={session.role === "renter" ? "/trips" : "/owner/dashboard"} variant="outline">
-                Dashboard
-              </Button>
-            ) : (
-              <Link href="/login" className="nav-signin">
-                Sign in
-              </Link>
-            )}
-            <Button href="/search">Find a car</Button>
-          </div>
-        </div>
-      </header>
+      <PublicNav session={session} />
       <section className={hero ? "public-hero" : "public-header"}>
         <div className="wrap">
           <p className="public-kicker">Bengaluru · self-drive rentals</p>

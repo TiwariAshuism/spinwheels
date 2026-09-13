@@ -9,13 +9,13 @@ import {
 } from "@spinwheels/config";
 
 export function getCars(filters?: { location?: string; evOnly?: boolean; maxPrice?: number }) {
+  const location = filters?.location?.trim().toLowerCase();
+
   return mockCars.filter((car) => {
     if (car.status !== "active") return false;
-    if (filters?.location && !car.location.toLowerCase().includes(filters.location.toLowerCase())) {
-      return false;
-    }
-    if (filters?.evOnly && !car.ev) return false;
-    if (filters?.maxPrice && car.pricePerDay > filters.maxPrice) return false;
+    if (location && !car.location.toLowerCase().includes(location)) return false;
+    if (filters?.evOnly === true && !car.ev) return false;
+    if (typeof filters?.maxPrice === "number" && car.pricePerDay > filters.maxPrice) return false;
     return true;
   });
 }

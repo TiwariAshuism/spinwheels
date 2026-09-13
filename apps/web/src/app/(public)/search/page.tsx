@@ -4,7 +4,6 @@ import { CarCard } from "@/features/cars/presentation/CarCard";
 import { CarSearchForm } from "@/features/cars/presentation/CarSearchForm";
 import { getCars } from "@/lib/data";
 import { carSearchSchema } from "@spinwheels/validation";
-import { ScrollReveal } from "@spinwheels/ui";
 
 export const metadata: Metadata = {
   title: "Browse cars — Spinwheels",
@@ -19,18 +18,14 @@ type SearchPageProps = {
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
-  const parsed = carSearchSchema.safeParse({
-    location: params.location,
-    evOnly: params.evOnly,
-    maxPrice: params.maxPrice,
-  });
-
+  const raw = {
+    location: typeof params.location === "string" ? params.location : undefined,
+    evOnly: typeof params.evOnly === "string" ? params.evOnly : undefined,
+    maxPrice: typeof params.maxPrice === "string" ? params.maxPrice : undefined,
+  };
+  const parsed = carSearchSchema.safeParse(raw);
   const filters = parsed.success ? parsed.data : {};
-  const cars = getCars({
-    location: filters.location,
-    evOnly: filters.evOnly,
-    maxPrice: filters.maxPrice,
-  });
+  const cars = getCars(filters);
 
   const defaults = {
     location: typeof params.location === "string" ? params.location : "",
@@ -38,26 +33,25 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     maxPrice: typeof params.maxPrice === "string" ? params.maxPrice : "",
   };
 
+  const hasFilters = Boolean(filters.location || filters.evOnly || filters.maxPrice);
+
   return (
     <PublicShell
       hero
       title="Browse verified cars"
       subtitle="Full pricing upfront. No sign-in needed until you book."
     >
-      <ScrollReveal>
-        <CarSearchForm defaults={defaults} />
-      </ScrollReveal>
-      <div className="app-grid app-grid-3 public-car-grid">
-        {cars.map((car, index) => (
-          <ScrollReveal key={car.id} delay={index * 70}>
-            <CarCard car={car} />
-          </ScrollReveal>
+      <CarSearchForm defaults={defaults} />
+      <p className="search-results-meta">
+        {hasFilters ? `${cars.length} car${cars.length === 1 ? "" : "s"} matching your filters` : `${cars.length} cars available`}
+      </p>
+      <div className="public-car-grid">
+        {cars.map((car) => (
+          <CarCard key={car.id} car={car} />
         ))}
       </div>
       {cars.length === 0 ? (
-        <ScrollReveal>
-          <p className="public-empty">No cars match your filters. Try a different location or price range.</p>
-        </ScrollReveal>
+        <p className="public-empty">No cars match your filters. Try a different location or price range.</p>
       ) : null}
     </PublicShell>
   );
