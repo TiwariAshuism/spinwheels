@@ -61,7 +61,7 @@ export const mockCars: Car[] = [
       "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=900&h=600&fit=crop&q=80",
     images: [
       "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200&h=800&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1593941707879-74c5b2a2a0a1?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&h=800&fit=crop&q=80",
       "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&h=800&fit=crop&q=80",
     ],
     description:
@@ -87,10 +87,10 @@ export const mockCars: Car[] = [
     instantBooking: true,
     status: "active",
     imageUrl:
-      "https://images.unsplash.com/photo-1519641471654-76ece0108eb1?w=900&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&h=600&fit=crop&q=80",
     images: [
-      "https://images.unsplash.com/photo-1519641471654-76ece0108eb1?w=1200&h=800&fit=crop&q=80",
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&h=800&fit=crop&q=80",
       "https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=1200&h=800&fit=crop&q=80",
     ],
     description:
@@ -116,11 +116,11 @@ export const mockCars: Car[] = [
     instantBooking: false,
     status: "active",
     imageUrl:
-      "https://images.unsplash.com/photo-1593941707879-74c5b2a2a0a1?w=900&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&h=600&fit=crop&q=80",
     images: [
-      "https://images.unsplash.com/photo-1593941707879-74c5b2a2a0a1?w=1200&h=800&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200&h=800&fit=crop&q=80",
       "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1200&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&h=800&fit=crop&q=80",
     ],
     description:
       "Premium MG ZS EV with long range and a quiet cabin — a great way to try electric before you buy.",

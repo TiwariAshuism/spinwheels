@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PublicShell } from "@/components/layout/PublicShell";
-import { CarCard } from "@/features/cars/presentation/CarCard";
 import { CarSearchForm } from "@/features/cars/presentation/CarSearchForm";
+import { SearchCarGrid } from "@/features/cars/presentation/SearchCarGrid";
 import { getCars } from "@/lib/data";
 import { carSearchSchema } from "@spinwheels/validation";
 
@@ -45,14 +45,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <p className="search-results-meta">
         {hasFilters ? `${cars.length} car${cars.length === 1 ? "" : "s"} matching your filters` : `${cars.length} cars available`}
       </p>
-      <div className="public-car-grid">
-        {cars.map((car) => (
-          <CarCard key={car.id} car={car} />
-        ))}
-      </div>
-      {cars.length === 0 ? (
-        <p className="public-empty">No cars match your filters. Try a different location or price range.</p>
-      ) : null}
+      <SearchCarGrid cars={cars} />
     </PublicShell>
   );
 }

@@ -1,4 +1,4 @@
-import { ScrollReveal } from "@spinwheels/ui";
+import { MotionReveal } from "@spinwheels/ui";
 import { Nav } from "./Nav";
 import { Hero } from "./Hero";
 import { Problem } from "./Problem";
@@ -21,28 +21,30 @@ export function LandingPage() {
       <Nav />
       <main>
         <Hero />
-        <FeaturedCars />
-        <ScrollReveal>
+        <MotionReveal direction="up">
+          <FeaturedCars />
+        </MotionReveal>
+        <MotionReveal direction="up">
           <Problem />
-        </ScrollReveal>
+        </MotionReveal>
         <HowItWorks />
         <WhySpinwheels />
-        <ScrollReveal>
+        <MotionReveal direction="scale">
           <InstantBooking />
-        </ScrollReveal>
-        <ScrollReveal direction="left">
+        </MotionReveal>
+        <MotionReveal direction="left">
           <DriverAddon />
-        </ScrollReveal>
-        <ScrollReveal>
+        </MotionReveal>
+        <MotionReveal direction="up">
           <GroupTrip />
-        </ScrollReveal>
+        </MotionReveal>
         <Owners />
-        <ScrollReveal>
+        <MotionReveal direction="up">
           <EvSection />
-        </ScrollReveal>
-        <ScrollReveal>
+        </MotionReveal>
+        <MotionReveal direction="up">
           <Trust />
-        </ScrollReveal>
+        </MotionReveal>
         <DriverTeaser />
         <WaitlistSection />
       </main>

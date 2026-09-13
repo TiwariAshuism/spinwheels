@@ -2,8 +2,8 @@
 
 import { Input, Select } from "@spinwheels/ui";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 
 type CarSearchFormProps = {
   defaults?: {
@@ -34,7 +34,10 @@ function buildSearchUrl(filters: FilterState) {
 
 export function CarSearchForm({ defaults }: CarSearchFormProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const [, startTransition] = useTransition();
   const debounceRef = useRef<number | undefined>(undefined);
+  const readyRef = useRef(false);
   const [filters, setFilters] = useState<FilterState>({
     location: defaults?.location ?? "",
     evOnly: defaults?.evOnly ? "true" : "",
@@ -43,9 +46,17 @@ export function CarSearchForm({ defaults }: CarSearchFormProps) {
 
   const applyFilters = useCallback(
     (next: FilterState) => {
-      router.replace(buildSearchUrl(next), { scroll: false });
+      if (!readyRef.current || pathname !== "/search") return;
+
+      const nextUrl = buildSearchUrl(next);
+      const currentUrl = `${window.location.pathname}${window.location.search}`;
+      if (nextUrl === currentUrl) return;
+
+      startTransition(() => {
+        router.replace(nextUrl, { scroll: false });
+      });
     },
-    [router],
+    [pathname, router],
   );
 
   const scheduleApply = useCallback(
@@ -57,16 +68,20 @@ export function CarSearchForm({ defaults }: CarSearchFormProps) {
   );
 
   useEffect(() => {
+    readyRef.current = true;
+    return () => {
+      readyRef.current = false;
+      window.clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
     setFilters({
       location: defaults?.location ?? "",
       evOnly: defaults?.evOnly ? "true" : "",
       maxPrice: defaults?.maxPrice ?? "",
     });
   }, [defaults?.evOnly, defaults?.location, defaults?.maxPrice]);
-
-  useEffect(() => {
-    return () => window.clearTimeout(debounceRef.current);
-  }, []);
 
   const updateField = (key: keyof FilterState, value: string, immediate = false) => {
     const next = { ...filters, [key]: value };

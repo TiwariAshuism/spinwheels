@@ -3,12 +3,10 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-function revealScrollRevealAncestors(element: HTMLElement) {
-  let parent = element.parentElement;
+function revealMotionAncestors(element: HTMLElement) {
+  let parent: HTMLElement | null = element;
   while (parent) {
-    if (parent.classList.contains("scroll-reveal")) {
-      parent.classList.add("scroll-reveal-visible");
-    }
+    parent.setAttribute("data-motion-force-visible", "true");
     parent = parent.parentElement;
   }
 }
@@ -20,14 +18,17 @@ function scrollToCurrentHash(attempt = 0) {
   const id = decodeURIComponent(hash.slice(1));
   const target = document.getElementById(id);
   if (!target) {
-    if (attempt < 12) {
-      window.setTimeout(() => scrollToCurrentHash(attempt + 1), 50);
+    if (attempt < 16) {
+      window.setTimeout(() => scrollToCurrentHash(attempt + 1), 75);
     }
     return;
   }
 
-  revealScrollRevealAncestors(target);
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  revealMotionAncestors(target);
+
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
 export function HashScroll() {
