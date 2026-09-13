@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CarLottie } from "@/components/marketing/CarLottie";
 import { PublicShell } from "@/components/layout/PublicShell";
 import { CarSearchForm } from "@/features/cars/presentation/CarSearchForm";
 import { SearchCarGrid } from "@/features/cars/presentation/SearchCarGrid";
@@ -40,6 +41,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       hero
       title="Browse verified cars"
       subtitle="Full pricing upfront. No sign-in needed until you book."
+      heroArt={<CarLottie variant="search" className="search-hero-lottie" />}
     >
       <CarSearchForm defaults={defaults} />
       <p className="search-results-meta">

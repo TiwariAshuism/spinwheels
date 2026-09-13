@@ -8,19 +8,29 @@ type PublicShellProps = {
   title: string;
   subtitle?: string;
   hero?: boolean;
+  heroArt?: ReactNode;
 };
 
-export async function PublicShell({ children, title, subtitle, hero = false }: PublicShellProps) {
+export async function PublicShell({
+  children,
+  title,
+  subtitle,
+  hero = false,
+  heroArt,
+}: PublicShellProps) {
   const session = await getSession();
 
   return (
     <div className="public-shell">
       <PublicNav session={session} />
       <section className={hero ? "public-hero" : "public-header"}>
-        <div className="wrap">
-          <p className="public-kicker">Bengaluru · self-drive rentals</p>
-          <h1>{title}</h1>
-          {subtitle ? <p className="public-subtitle">{subtitle}</p> : null}
+        <div className={`wrap${heroArt ? " public-hero-grid" : ""}`}>
+          <div className="public-hero-copy">
+            <p className="public-kicker">Bengaluru · self-drive rentals</p>
+            <h1>{title}</h1>
+            {subtitle ? <p className="public-subtitle">{subtitle}</p> : null}
+          </div>
+          {heroArt}
         </div>
       </section>
       <main className="public-main">

@@ -39,6 +39,7 @@ function isStaticAsset(pathname) {
   return (
     pathname.startsWith("/_next/static/") ||
     pathname.startsWith("/icons/") ||
+    pathname.startsWith("/lottie/") ||
     pathname.endsWith(".woff2")
   );
 }

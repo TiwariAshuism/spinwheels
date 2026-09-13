@@ -18,5 +18,6 @@ export {
   MotionPress,
   MotionTilt,
 } from "./animate";
+export { LottieAnimation } from "./LottieAnimation";
 export { ImageCarousel } from "./ImageCarousel";
 export { Stat } from "./Stat";

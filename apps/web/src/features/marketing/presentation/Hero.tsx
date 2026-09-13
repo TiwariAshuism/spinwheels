@@ -1,4 +1,5 @@
 import { Button, Container, MotionFloat, MotionHero, MotionPress, MotionReveal } from "@spinwheels/ui";
+import { CarLottie } from "@/components/marketing/CarLottie";
 import { SiteLink } from "@/components/layout/SiteLink";
 import { HeroArt } from "./HeroArt";
 
@@ -33,7 +34,7 @@ export function Hero() {
           </MotionReveal>
         </MotionHero>
         <MotionFloat className="hero-art-wrap">
-          <HeroArt />
+          <CarLottie className="hero-lottie" variant="hero" fallback={<HeroArt />} />
         </MotionFloat>
       </Container>
     </section>

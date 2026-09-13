@@ -1,6 +1,7 @@
 "use client";
 
-import { MotionStagger, MotionStaggerItem } from "@spinwheels/ui";
+import { LottieAnimation, MotionStagger, MotionStaggerItem } from "@spinwheels/ui";
+import { marketingLotties } from "../lottie/assets";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { howSteps } from "../data/content";
@@ -9,6 +10,8 @@ export function HowItWorksSteps() {
   const [active, setActive] = useState(0);
   const prefersReducedMotion = useReducedMotion();
   const step = howSteps[active];
+  const stepLottie =
+    marketingLotties.howSteps[step.title as keyof typeof marketingLotties.howSteps];
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -87,13 +90,25 @@ export function HowItWorksSteps() {
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="how-step-detail-kicker">
-            Step {active + 1} of {howSteps.length}
-          </p>
-          <h3>
-            {step.icon} {step.title}
-          </h3>
-          <p>{step.description}</p>
+          <div className="how-step-detail-grid">
+            <div>
+              <p className="how-step-detail-kicker">
+                Step {active + 1} of {howSteps.length}
+              </p>
+              <h3>
+                {step.icon} {step.title}
+              </h3>
+              <p>{step.description}</p>
+            </div>
+            {stepLottie ? (
+              <LottieAnimation
+                key={stepLottie}
+                className="how-step-lottie"
+                src={stepLottie}
+                ariaLabel={`${step.title} step illustration`}
+              />
+            ) : null}
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>

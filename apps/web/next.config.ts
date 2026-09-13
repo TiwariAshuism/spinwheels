@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
       source: "/icons/:path*",
       headers: [{ key: "Cache-Control", value: "public, max-age=604800, immutable" }],
     },
+    {
+      source: "/lottie/:path*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=604800, immutable" }],
+    },
   ],
 };
 

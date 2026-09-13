@@ -1,10 +1,16 @@
-import { Container } from "@spinwheels/ui";
+import { Container, LottieAnimation } from "@spinwheels/ui";
+import { marketingLotties } from "../lottie/assets";
 
 export function EvSection() {
   return (
     <section className="ev">
       <Container className="ev-inner">
-        <div className="ev-icon">⚡</div>
+        <LottieAnimation
+          className="ev-lottie"
+          src={marketingLotties.ev}
+          ariaLabel="Electric vehicle charging animation"
+          fallback={<div className="ev-icon">⚡</div>}
+        />
         <div>
           <h2>Try an EV before you buy one.</h2>
           <p>

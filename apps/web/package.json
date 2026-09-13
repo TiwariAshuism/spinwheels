@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "generate:icons": "node scripts/generate-pwa-icons.mjs",
+    "vendor:lotties": "node scripts/vendor-lotties.mjs",
     "dev": "npm run generate:icons && next dev",
     "build": "npm run generate:icons && next build",
     "start": "next start",

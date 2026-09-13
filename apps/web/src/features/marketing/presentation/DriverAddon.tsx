@@ -1,3 +1,4 @@
+import { CarLottie } from "@/components/marketing/CarLottie";
 import { Container, Kicker, SoonPill } from "@spinwheels/ui";
 
 export function DriverAddon() {
@@ -5,6 +6,7 @@ export function DriverAddon() {
     <section className="feature feature-driver">
       <Container className="feature-grid feature-grid-reverse">
         <div className="driver-visual is-soon">
+          <CarLottie variant="driverAddon" className="driver-addon-lottie" />
           <div className="toggle-demo">
             <span>Add a driver</span>
             <div className="toggle-track">

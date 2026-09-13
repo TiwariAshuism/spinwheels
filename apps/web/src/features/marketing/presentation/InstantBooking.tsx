@@ -1,3 +1,4 @@
+import { CarLottie } from "@/components/marketing/CarLottie";
 import { Button, Container, Kicker } from "@spinwheels/ui";
 import { instantSteps } from "../data/content";
 
@@ -16,6 +17,7 @@ export function InstantBooking() {
           <Button href="#waitlist">Get early access</Button>
         </div>
         <div className="instant-visual">
+          <CarLottie variant="instantBooking" className="instant-lottie" />
           <div className="instant-badge">
             <span className="instant-time">2:00</span>
             <span className="instant-label">hours to pickup</span>

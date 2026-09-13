@@ -1,4 +1,5 @@
-import { Container, SoonPill } from "@spinwheels/ui";
+import { Container, LottieAnimation, SoonPill } from "@spinwheels/ui";
+import { marketingLotties } from "../lottie/assets";
 import { WaitlistForm } from "@/features/waitlist/WaitlistForm";
 import { driverTeaserStats } from "../data/content";
 
@@ -23,16 +24,23 @@ export function DriverTeaser() {
             pendingLabel="Saving..."
           />
         </div>
-        <div className="driver-teaser-stats">
-          {driverTeaserStats.map((stat) => (
-            <div key={stat.title} className="driver-teaser-stat">
-              <span className="icon">{stat.icon}</span>
-              <div className="txt">
-                <strong>{stat.title}</strong>
-                <span>{stat.description}</span>
+        <div className="driver-teaser-visual">
+          <LottieAnimation
+            className="driver-teaser-lottie"
+            src={marketingLotties.driver}
+            ariaLabel="Professional driver at the wheel"
+          />
+          <div className="driver-teaser-stats">
+            {driverTeaserStats.map((stat) => (
+              <div key={stat.title} className="driver-teaser-stat">
+                <span className="icon">{stat.icon}</span>
+                <div className="txt">
+                  <strong>{stat.title}</strong>
+                  <span>{stat.description}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>

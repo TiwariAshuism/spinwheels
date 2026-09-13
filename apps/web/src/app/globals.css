@@ -120,6 +120,35 @@ section h2 {
   justify-content: center;
   align-items: center;
 }
+.lottie-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 180px;
+}
+.lottie-wrap--loading {
+  opacity: 0.92;
+}
+.lottie-player {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: block;
+}
+.lottie-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+.hero-lottie {
+  width: min(100%, 420px);
+  min-height: 320px;
+  aspect-ratio: 1;
+}
+.hero-lottie .lottie-player {
+  max-height: 380px;
+}
 
 /* ---------- PROBLEM ---------- */
 .problem-grid {
@@ -215,6 +244,17 @@ section h2 {
   border: 1px solid var(--line);
   box-shadow: 0 12px 32px rgba(18, 40, 36, 0.06);
 }
+.how-step-detail-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: center;
+}
+.how-step-lottie {
+  width: min(100%, 200px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
 .how-step-detail-kicker {
   font-size: 0.82rem;
   font-weight: 600;
@@ -283,6 +323,11 @@ section h2 {
   flex-direction: column;
   align-items: center;
 }
+.group-trip-lottie {
+  width: min(100%, 180px);
+  aspect-ratio: 1;
+  margin: 0 auto 8px;
+}
 .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .feature-grid-reverse .driver-visual { order: 1; }
 .feature-lede { font-size: 1.02rem; margin-top: 16px; max-width: 46ch; color: var(--muted); }
@@ -295,6 +340,11 @@ section h2 {
 
 /* instant booking visual */
 .instant-visual { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.instant-lottie {
+  width: min(100%, 220px);
+  aspect-ratio: 1;
+  margin-bottom: -8px;
+}
 .instant-badge { width: 160px; height: 160px; border-radius: 50%; background: var(--yellow); color: var(--teal-deep); display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .instant-time { font-family: var(--font-display), sans-serif; font-size: 2.2rem; font-weight: 700; }
 .instant-label { font-size: 0.82rem; }
@@ -425,6 +475,11 @@ section h2 {
 /* ---------- EV ---------- */
 .ev { background: var(--bg); }
 .ev-inner { display: flex; align-items: center; gap: 24px; }
+.ev-lottie {
+  width: 120px;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+}
 .ev-icon { font-size: 2.6rem; flex-shrink: 0; }
 .ev h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin-bottom: 8px; }
 .ev p { max-width: 52ch; }
@@ -504,7 +559,19 @@ section h2 {
   color: var(--yellow);
   min-height: 20px;
 }
-.driver-teaser-stats { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 12px; }
+.driver-teaser-visual {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.driver-teaser-lottie {
+  width: min(100%, 220px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.driver-teaser-stats { display: flex; flex-direction: column; gap: 12px; }
 .driver-teaser-stat {
   background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
   border-radius: 12px; padding: 16px 18px; display: flex; align-items: center; gap: 12px;
@@ -666,6 +733,8 @@ img,svg,video,iframe { max-width:100%; }
   .trust-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .how-steps { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
   .how-arrow { display:none; }
+  .how-step-detail-grid { grid-template-columns: 1fr; }
+  .how-step-lottie { max-width: 160px; }
 }
 @media (max-width:700px) {
   section { padding:60px 0; }
@@ -1422,6 +1491,18 @@ img,svg,video,iframe { max-width:100%; }
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .public-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-hero-lottie {
+    margin: 0 auto;
+  }
+
+  .featured-lottie {
+    width: min(100%, 160px);
+  }
 }
 
 .scroll-reveal {
@@ -1515,6 +1596,23 @@ img,svg,video,iframe { max-width:100%; }
   background: var(--teal-deep);
   color: var(--text-on-dark);
   padding: 56px 0 48px;
+}
+
+.public-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.public-hero-copy {
+  min-width: 0;
+}
+
+.search-hero-lottie {
+  width: min(100%, 280px);
+  aspect-ratio: 1;
+  margin-left: auto;
 }
 
 .public-kicker {
@@ -1635,14 +1733,35 @@ img,svg,video,iframe { max-width:100%; }
 
 .featured-head {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
   margin: 16px 0 40px;
 }
 
+.featured-head-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  min-width: 0;
+}
+
 .featured-head h2 {
   max-width: 20ch;
+  margin: 0;
+}
+
+.featured-lottie {
+  width: min(100%, 180px);
+  flex-shrink: 0;
+  aspect-ratio: 1;
+}
+
+.driver-addon-lottie {
+  width: min(100%, 200px);
+  aspect-ratio: 1;
+  margin: 0 auto 16px;
 }
 
 .featured-carousel {

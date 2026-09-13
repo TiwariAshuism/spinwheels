@@ -1,4 +1,5 @@
-import { Container, Kicker } from "@spinwheels/ui";
+import { Container, Kicker, LottieAnimation } from "@spinwheels/ui";
+import { marketingLotties } from "../lottie/assets";
 import { groupNotes } from "../data/content";
 
 export function GroupTrip() {
@@ -13,6 +14,11 @@ export function GroupTrip() {
             booking — so more people means a lower cost per person, not a bigger bill.
           </p>
         </div>
+        <LottieAnimation
+          className="group-trip-lottie"
+          src={marketingLotties.groupTrip}
+          ariaLabel="Group of people sharing a trip"
+        />
         <div className="group-visual">
           <div className="group-card group-before">
             <p className="group-label">Just you two</p>

@@ -54,6 +54,7 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/icons") ||
+    pathname.startsWith("/lottie") ||
     pathname === "/sw.js" ||
     pathname === "/offline.html" ||
     pathname === "/manifest.webmanifest"
@@ -85,6 +86,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|icons|sw.js|offline.html|manifest.webmanifest).*)",
+    "/((?!_next/static|_next/image|favicon.ico|icons|lottie|sw.js|offline.html|manifest.webmanifest).*)",
   ],
 };
