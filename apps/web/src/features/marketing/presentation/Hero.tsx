@@ -1,4 +1,4 @@
-import { Button, Container, MotionFloat, MotionHero, MotionReveal } from "@spinwheels/ui";
+import { Button, Container, MotionFloat, MotionHero, MotionPress, MotionReveal } from "@spinwheels/ui";
 import { SiteLink } from "@/components/layout/SiteLink";
 import { HeroArt } from "./HeroArt";
 
@@ -21,10 +21,14 @@ export function Hero() {
           </MotionReveal>
           <MotionReveal direction="up" delay={240}>
             <div className="hero-ctas">
-              <Button href="/search">Browse cars</Button>
-              <SiteLink href="#how" className="btn btn-outline-light">
-                See how it works
-              </SiteLink>
+              <MotionPress>
+                <Button href="/search">Browse cars</Button>
+              </MotionPress>
+              <MotionPress>
+                <SiteLink href="/how-it-works" className="btn btn-outline-light">
+                  See how it works
+                </SiteLink>
+              </MotionPress>
             </div>
           </MotionReveal>
         </MotionHero>

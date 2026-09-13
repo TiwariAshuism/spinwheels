@@ -3,7 +3,7 @@ import { WaitlistForm } from "./WaitlistForm";
 
 export function WaitlistSection() {
   return (
-    <section className="waitlist" id="waitlist">
+    <section className="waitlist anchor-section" id="waitlist">
       <Container className="waitlist-inner">
         <Kicker light>Get early access</Kicker>
         <h2>Be first in line when Spinwheels launches in Bengaluru</h2>

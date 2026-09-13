@@ -23,6 +23,14 @@ const nextConfig: NextConfig = {
         { key: "Service-Worker-Allowed", value: "/" },
       ],
     },
+    {
+      source: "/manifest.webmanifest",
+      headers: [{ key: "Cache-Control", value: "public, max-age=86400" }],
+    },
+    {
+      source: "/icons/:path*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=604800, immutable" }],
+    },
   ],
 };
 

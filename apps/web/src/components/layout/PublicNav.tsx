@@ -12,8 +12,8 @@ type PublicNavProps = {
 
 const PUBLIC_LINKS = [
   { href: "/search", label: "Browse cars" },
-  { href: "/#how", label: "How it works" },
-  { href: "/#waitlist", label: "Early access" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/?section=waitlist", label: "Early access" },
 ] as const;
 
 export function PublicNav({ session }: PublicNavProps) {

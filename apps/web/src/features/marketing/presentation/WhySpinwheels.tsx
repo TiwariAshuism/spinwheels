@@ -1,9 +1,16 @@
-import { Container, Kicker, MotionReveal, MotionStagger, MotionStaggerItem } from "@spinwheels/ui";
+import {
+  Container,
+  Kicker,
+  MotionInteractiveCard,
+  MotionReveal,
+  MotionStagger,
+  MotionStaggerItem,
+} from "@spinwheels/ui";
 import { whyItems } from "../data/content";
 
 export function WhySpinwheels() {
   return (
-    <section className="why" id="why">
+    <section className="why anchor-section" id="why">
       <Container>
         <div className="section-head">
           <Kicker>Why Spinwheels</Kicker>
@@ -14,11 +21,11 @@ export function WhySpinwheels() {
         <MotionStagger className="why-grid">
           {whyItems.map((item) => (
             <MotionStaggerItem key={item.title}>
-              <div className="why-card">
+              <MotionInteractiveCard className="why-card interactive-card">
                 <span className="why-icon">{item.icon}</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-              </div>
+              </MotionInteractiveCard>
             </MotionStaggerItem>
           ))}
         </MotionStagger>

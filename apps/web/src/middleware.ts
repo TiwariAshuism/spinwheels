@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import type { SessionUser } from "@spinwheels/types";
 
-const PUBLIC_PREFIXES = ["/", "/login", "/signup", "/search", "/cars", "/book", "/api"];
+const PUBLIC_PREFIXES = ["/", "/login", "/signup", "/search", "/cars", "/book", "/api", "/how-it-works"];
 
 function getSessionFromRequest(request: NextRequest): SessionUser | null {
   const raw = request.cookies.get("sw_session")?.value;
@@ -55,6 +55,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/icons") ||
     pathname === "/sw.js" ||
+    pathname === "/offline.html" ||
     pathname === "/manifest.webmanifest"
   ) {
     return NextResponse.next();
@@ -83,5 +84,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|icons|sw.js|manifest.webmanifest).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|icons|sw.js|offline.html|manifest.webmanifest).*)",
+  ],
 };

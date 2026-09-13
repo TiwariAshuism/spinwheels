@@ -9,74 +9,40 @@ type SiteLinkProps = Omit<ComponentProps<"a">, "href"> & {
   children: ReactNode;
 };
 
-type ParsedHref =
-  | { kind: "route"; href: string }
-  | { kind: "hash"; path: string; hash: string; full: string };
-
-function parseHref(href: string): ParsedHref {
+function splitHashHref(href: string) {
   const hashIndex = href.indexOf("#");
-  if (hashIndex === -1) {
-    return { kind: "route", href };
-  }
-
+  if (hashIndex === -1) return null;
   const path = href.slice(0, hashIndex) || "/";
-  const hash = href.slice(hashIndex);
-  return { kind: "hash", path, hash, full: `${path}${hash}` };
-}
-
-function scrollToHash(hash: string) {
-  const id = decodeURIComponent(hash.slice(1));
-  const target = document.getElementById(id);
-  if (!target) return;
-
-  let parent = target.parentElement;
-  while (parent) {
-    if (parent.classList.contains("scroll-reveal")) {
-      parent.classList.add("scroll-reveal-visible");
-    }
-    parent = parent.parentElement;
-  }
-
-  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  return { path, href };
 }
 
 export function SiteLink({ href, children, onClick, ...rest }: SiteLinkProps) {
   const pathname = usePathname();
-  const parsed = parseHref(href);
+  const hashLink = splitHashHref(href);
 
-  if (parsed.kind === "route") {
+  if (hashLink) {
+    const needsFullNavigation = pathname !== hashLink.path;
+
+    const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+      onClick?.(event);
+      if (event.defaultPrevented) return;
+
+      if (needsFullNavigation) {
+        event.preventDefault();
+        window.location.href = hashLink.href;
+      }
+    };
+
     return (
-      <Link href={parsed.href} onClick={onClick} {...rest}>
+      <a href={hashLink.href} onClick={handleClick} {...rest}>
         {children}
-      </Link>
+      </a>
     );
   }
 
-  const onTargetPage = pathname === parsed.path;
-  const anchorHref = onTargetPage ? parsed.hash : parsed.full;
-
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.(event);
-    if (event.defaultPrevented) return;
-    event.preventDefault();
-
-    if (!onTargetPage) {
-      window.location.assign(parsed.full);
-      return;
-    }
-
-    if (window.location.hash !== parsed.hash) {
-      window.history.pushState(null, "", parsed.full);
-      window.dispatchEvent(new HashChangeEvent("hashchange"));
-      return;
-    }
-
-    scrollToHash(parsed.hash);
-  };
-
   return (
-    <a href={anchorHref} onClick={handleClick} {...rest}>
+    <Link href={href} onClick={onClick} {...rest}>
       {children}
-    </a>
+    </Link>
   );
 }

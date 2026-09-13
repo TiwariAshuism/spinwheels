@@ -1,38 +1,15 @@
-import { Container, Kicker, MotionReveal, MotionStagger, MotionStaggerItem } from "@spinwheels/ui";
-import { howSteps } from "../data/content";
+import { Container, Kicker } from "@spinwheels/ui";
+import { HowItWorksSteps } from "./HowItWorksSteps";
 
 export function HowItWorks() {
   return (
-    <section className="how" id="how">
+    <section className="how anchor-section" id="how">
       <Container>
         <div className="section-head">
           <Kicker>How it works</Kicker>
-          <MotionReveal direction="up">
-            <h2>From search to drive, in four steps</h2>
-          </MotionReveal>
+          <h2>From search to drive, in four steps</h2>
         </div>
-        <MotionStagger className="how-steps">
-          {howSteps.flatMap((step, index) => {
-            const nodes = [];
-            if (index > 0) {
-              nodes.push(
-                <div key={`arrow-${step.title}`} className="how-arrow">
-                  →
-                </div>,
-              );
-            }
-            nodes.push(
-              <MotionStaggerItem key={step.title} className="how-step-wrap">
-                <div className="how-step">
-                  <div className="how-icon">{step.icon}</div>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
-              </MotionStaggerItem>,
-            );
-            return nodes;
-          })}
-        </MotionStagger>
+        <HowItWorksSteps />
       </Container>
     </section>
   );

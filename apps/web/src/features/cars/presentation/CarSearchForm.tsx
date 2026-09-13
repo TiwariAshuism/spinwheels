@@ -2,8 +2,7 @@
 
 import { Input, Select } from "@spinwheels/ui";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useRef } from "react";
 
 type CarSearchFormProps = {
   defaults?: {
@@ -13,91 +12,25 @@ type CarSearchFormProps = {
   };
 };
 
-type FilterState = {
-  location: string;
-  evOnly: string;
-  maxPrice: string;
-};
-
-function buildSearchUrl(filters: FilterState) {
-  const params = new URLSearchParams();
-  const location = filters.location.trim();
-  const maxPrice = filters.maxPrice.trim();
-
-  if (location) params.set("location", location);
-  if (filters.evOnly === "true") params.set("evOnly", "true");
-  if (maxPrice) params.set("maxPrice", maxPrice);
-
-  const query = params.toString();
-  return query ? `/search?${query}` : "/search";
-}
-
 export function CarSearchForm({ defaults }: CarSearchFormProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [, startTransition] = useTransition();
+  const formRef = useRef<HTMLFormElement>(null);
   const debounceRef = useRef<number | undefined>(undefined);
-  const readyRef = useRef(false);
-  const [filters, setFilters] = useState<FilterState>({
-    location: defaults?.location ?? "",
-    evOnly: defaults?.evOnly ? "true" : "",
-    maxPrice: defaults?.maxPrice ?? "",
-  });
 
-  const applyFilters = useCallback(
-    (next: FilterState) => {
-      if (!readyRef.current || pathname !== "/search") return;
-
-      const nextUrl = buildSearchUrl(next);
-      const currentUrl = `${window.location.pathname}${window.location.search}`;
-      if (nextUrl === currentUrl) return;
-
-      startTransition(() => {
-        router.replace(nextUrl, { scroll: false });
-      });
-    },
-    [pathname, router],
-  );
-
-  const scheduleApply = useCallback(
-    (next: FilterState) => {
-      window.clearTimeout(debounceRef.current);
-      debounceRef.current = window.setTimeout(() => applyFilters(next), 350);
-    },
-    [applyFilters],
-  );
-
-  useEffect(() => {
-    readyRef.current = true;
-    return () => {
-      readyRef.current = false;
-      window.clearTimeout(debounceRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    setFilters({
-      location: defaults?.location ?? "",
-      evOnly: defaults?.evOnly ? "true" : "",
-      maxPrice: defaults?.maxPrice ?? "",
-    });
-  }, [defaults?.evOnly, defaults?.location, defaults?.maxPrice]);
-
-  const updateField = (key: keyof FilterState, value: string, immediate = false) => {
-    const next = { ...filters, [key]: value };
-    setFilters(next);
-    if (immediate) {
-      window.clearTimeout(debounceRef.current);
-      applyFilters(next);
-      return;
-    }
-    scheduleApply(next);
+  const queueSubmit = () => {
+    window.clearTimeout(debounceRef.current);
+    debounceRef.current = window.setTimeout(() => {
+      formRef.current?.requestSubmit();
+    }, 350);
   };
 
-  const hasFilters = Boolean(filters.location.trim() || filters.evOnly === "true" || filters.maxPrice.trim());
+  const hasFilters = Boolean(
+    (defaults?.location ?? "").trim() ||
+      defaults?.evOnly ||
+      (defaults?.maxPrice ?? "").trim(),
+  );
 
   return (
-    <div className="car-search-panel">
+    <form ref={formRef} action="/search" method="get" className="car-search-panel">
       <div className="car-search-panel-head">
         <p className="car-search-panel-title">Filter cars</p>
         {hasFilters ? (
@@ -112,15 +45,22 @@ export function CarSearchForm({ defaults }: CarSearchFormProps) {
         <Input
           label="Location"
           name="location"
-          value={filters.location}
-          onChange={(event) => updateField("location", event.target.value)}
+          defaultValue={defaults?.location ?? ""}
+          onChange={queueSubmit}
           placeholder="Koramangala"
         />
         <Select
           label="Fuel type"
           name="evOnly"
-          value={filters.evOnly}
-          onChange={(event) => updateField("evOnly", event.target.value, true)}
+          defaultValue={defaults?.evOnly ? "true" : ""}
+          onChange={(event) => {
+            if (event.target.value === "") {
+              event.target.removeAttribute("name");
+            } else {
+              event.target.setAttribute("name", "evOnly");
+            }
+            formRef.current?.requestSubmit();
+          }}
         >
           <option value="">All cars</option>
           <option value="true">EV only</option>
@@ -130,11 +70,11 @@ export function CarSearchForm({ defaults }: CarSearchFormProps) {
           name="maxPrice"
           type="number"
           min={0}
-          value={filters.maxPrice}
-          onChange={(event) => updateField("maxPrice", event.target.value)}
+          defaultValue={defaults?.maxPrice ?? ""}
+          onChange={queueSubmit}
           placeholder="2500"
         />
       </div>
-    </div>
+    </form>
   );
 }

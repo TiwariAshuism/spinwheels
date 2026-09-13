@@ -14,6 +14,9 @@ export {
   MotionHover,
   MotionHero,
   MotionFloat,
+  MotionInteractiveCard,
+  MotionPress,
+  MotionTilt,
 } from "./animate";
 export { ImageCarousel } from "./ImageCarousel";
 export { Stat } from "./Stat";
